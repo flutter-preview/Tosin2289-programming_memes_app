@@ -15,7 +15,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Future getmeme() async {
     var url = "https://programming-memes-images.p.rapidapi.com/v1/memes";
     Map<String, String> headers = {
-      'X-RapidAPI-Key': 'b69cb11239mshab2a2abc94c6a70p16a0dbjsna6609ede3bdb',
+      'X-RapidAPI-Key': 'Your rapid api key',
       'X-RapidAPI-Host': 'programming-memes-images.p.rapidapi.com'
     };
     var response = await http.get(Uri.parse(url), headers: headers);
