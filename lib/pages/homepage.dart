@@ -13,21 +13,25 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Future getmeme() async {
-    var url = "https://programming-memes-images.p.rapidapi.com/v1/memes";
-    Map<String, String> headers = {
-      'X-RapidAPI-Key': 'b69cb11239mshab2a2abc94c6a70p16a0dbjsna6609ede3bdb',
-      'X-RapidAPI-Host': 'programming-memes-images.p.rapidapi.com'
-    };
-    var response = await http.get(Uri.parse(url), headers: headers);
-    var jsonData = jsonDecode(response.body);
-    List<user> Users = [];
-    for (var u in jsonData) {
-      user users = user(
-        u['image'],
-      );
-      Users.add(users);
+    try {
+      var url = "https://programming-memes-images.p.rapidapi.com/v1/memes";
+      Map<String, String> headers = {
+        'X-RapidAPI-Key': 'b69cb11239mshab2a2abc94c6a70p16a0dbjsna6609ede3bdb',
+        'X-RapidAPI-Host': 'programming-memes-images.p.rapidapi.com'
+      };
+      var response = await http.get(Uri.parse(url), headers: headers);
+      var jsonData = jsonDecode(response.body);
+      List<user> Users = [];
+      for (var u in jsonData) {
+        user users = user(
+          u['image'],
+        );
+        Users.add(users);
+      }
+      return Users;
+    } catch (e) {
+      print(e);
     }
-    return Users;
   }
 
   @override
@@ -68,16 +72,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   );
-                } else
+                } else {
                   return RefreshIndicator(
-                    triggerMode: RefreshIndicatorTriggerMode.onEdge,
-                    strokeWidth: RefreshProgressIndicator.defaultStrokeWidth,
-                    onRefresh: getmeme,
+                    onRefresh: () async {
+                      setState(() {
+                        getmeme();
+                      });
+                    },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 20.0, horizontal: 10),
                       child: PageView.builder(
-                          scrollDirection: Axis.horizontal,
+                          scrollDirection: Axis.vertical,
                           itemCount: snapshot.data.length,
                           itemBuilder: ((context, index) {
                             return Container(
@@ -89,10 +95,15 @@ class _MyHomePageState extends State<MyHomePage> {
                                 color: Colors.white10,
                                 borderRadius: BorderRadius.circular(10),
                               ),
+                              child: Image.network(
+                                snapshot.data[index].image,
+                                fit: BoxFit.contain,
+                              ),
                             );
                           })),
                     ),
                   );
+                }
               }),
             ),
           ),
