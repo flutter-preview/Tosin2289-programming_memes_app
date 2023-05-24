@@ -40,17 +40,17 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
           centerTitle: true,
-          title: Text("Programming memes"),
+          title: const Text("Programming memes"),
         ),
         backgroundColor: Colors.blueAccent[400],
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
-          child: Container(
+          child: SizedBox(
             child: FutureBuilder(
               future: getmeme(),
               builder: ((context, snapshot) {
                 if (snapshot.data == null) {
-                  return Container(
+                  return SizedBox(
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -58,10 +58,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           Lottie.asset(
                             'assets/laughing.json',
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 50,
                           ),
-                          Text(
+                          const Text(
                             'Created by Phenomes',
                             style: TextStyle(
                                 fontSize: 25,
