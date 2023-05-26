@@ -38,11 +38,15 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blueAccent,
+          elevation: 0,
+          backgroundColor: Colors.white,
           centerTitle: true,
-          title: const Text("Programming memes"),
+          title: const Text(
+            "Programming memes",
+            style: TextStyle(color: Colors.black),
+          ),
         ),
-        backgroundColor: Colors.blueAccent[400],
+        backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
           child: SizedBox(
@@ -92,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 image: DecorationImage(
                                     image: NetworkImage(
                                         snapshot.data[index].image)),
-                                color: Colors.white10,
+                                color: Colors.white60,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Image.network(
